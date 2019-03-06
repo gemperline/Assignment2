@@ -6,62 +6,65 @@ using namespace std;
 
 #include "person.cpp"
 
-void readData(string fileName)
+void readData(Person P[], string fileName, const int SIZE)
 {
-  ifstream inFile;
-  inFile.open(fileName);
-  string input;
+  string fName;
+  string lName;
+  float  hours;
+  float  pay;
+  int numPersons = 0;
 
-  for(int i = 0; i < numRecords; i++)
-  {
-    inFile >> employees.setFirstName() >> employees.setLastName() >> employees.setHoursWorked() >> employees.setPayRate();
-  
-  }
-}
-
-int main()
-{
   ifstream inFile;
   inFile.open("input.txt");
 
-  int numPersons = 0;Person::Person()
-{
-  inFile.open("input.txt");
-  << "file opened" << endl
-);
-  string line;
-
-  if(inFile.is_open())
+  if (inFile.is_open())
   {
-    cout << "File opened successfully" << endl;
+    cout << "File opened successfully ..." << endl;
 
-    while(getline(inFile, line))
+    while(inFile >> fName && numPersons < SIZE)
     {
+      inFile >> lName >> hours >> pay;
+
+      P[numPersons].setFirstName(fName);
+      P[numPersons].setLastName(lName);
+      P[numPersons].setHoursWorked(hours);
+      P[numPersons].setPayRate(pay);
+
+      cout << P[numPersons].getFirstName() << endl;
       numPersons++;
     }
+    cout << "Number of people: " << numPersons << endl;
+
     inFile.close();
   }
   else
+    cout << "ERROR: could not open file ..." << endl;
+}
+
+
+void writeData(Person P[], string fileName, const int SIZE)
+{
+  ofstream outFile;
+  outFile.open(filename);
+
+  for(int i = 0; i < SIZE; i++)
   {
-    cout << "ERROR: file not opened" << endl;
+    outFile << P[i].fullName << P[i].totalPay << endl;
   }
-
-//  inFile.open();
-
-// create a array of 20 empty people
-  Person employees[20];
-
-  for(int i = 0; i < numPersons; i++)
-  {
-    employees[i].getFirstName();
-    employees[i].getLastName();
-    employees[i].getHoursWorked();
-    employees[i].getPayRate();
-  }
+}
 
 
+int main()
+{
+  const int SIZE = 20;
+  // create an array of 20 empty people
+  Person employees[SIZE];
 
-//  inFile.close();
+  // read the data from file into the array
+  readData(employees, "input.txt", SIZE);
+
+  // write data to an output file
+  writeData(employees, "output.txt", SIZE);
 
   return 0;
 }
