@@ -19,7 +19,8 @@ int readData(Person P[], string fileName, const int SIZE, int &numPeople)
 
   if (inFile.is_open())
   {
-    cout << "File opened successfully ...\n" << endl;
+    cout << "File opened successfully ..." << endl;
+    cout << "Reading from input file ..." << endl;
 
     while(inFile >> fName && numPeople < SIZE)
     {
@@ -46,12 +47,14 @@ void writeData(Person P[], string fileName, int numPeople)
   ofstream outFile;
   outFile.open(fileName);
 
+  cout << "Writing to output file ..." << endl;
+
   for(int i = 0; i < numPeople; i++)
   {
     outFile << P[i].fullName() << " " << fixed << setprecision(2) << P[i].totalPay() << endl;
-    cout << P[i].fullName() << endl;
   }
   outFile.close();
+  cout << "Output file complete ..." << endl;
 }
 
 
@@ -67,5 +70,6 @@ int main()
   // write data to an output file
   writeData(employees, "output.txt", numPeople);
 
+  cout << "Exiting ..." << endl;
   return 0;
 }

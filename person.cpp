@@ -2,11 +2,7 @@
 
 Person::Person()
 {
-  string lastName;
-  string firstName;
-  float  payRate;
-  float  hoursWorked;
-};
+}
 
 void Person::setLastName(string lName)
 {
